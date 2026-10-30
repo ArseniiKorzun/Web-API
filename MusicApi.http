@@ -1,0 +1,95 @@
+@MusicApi_HostAddress = http://localhost:5191
+
+### Усі альбоми
+GET {{MusicApi_HostAddress}}/api/albums
+Accept: application/json
+
+### Альбом за id
+GET {{MusicApi_HostAddress}}/api/albums/3
+Accept: application/json
+
+### Альбом за id, не знайдено
+GET {{MusicApi_HostAddress}}/api/albums/999
+Accept: application/json
+
+### Пошук за жанром
+GET {{MusicApi_HostAddress}}/api/albums/search?genre=Rock
+Accept: application/json
+
+### Пошук за виконавцем і максимальною ціною
+GET {{MusicApi_HostAddress}}/api/albums/search?artist=daft&maxPrice=20
+Accept: application/json
+
+### Пошук за назвою і діапазоном років
+GET {{MusicApi_HostAddress}}/api/albums/search?title=the&minYear=1970&maxYear=1980
+Accept: application/json
+
+### Пошук, некоректний діапазон років
+GET {{MusicApi_HostAddress}}/api/albums/search?minYear=2010&maxYear=2000
+Accept: application/json
+
+### Додати альбом
+POST {{MusicApi_HostAddress}}/api/albums
+Content-Type: application/json
+
+{
+  "title": "To Pimp a Butterfly",
+  "year": 2015,
+  "price": 21.99,
+  "artistId": 4,
+  "genreId": 4
+}
+
+### Додати альбом, рік у майбутньому
+POST {{MusicApi_HostAddress}}/api/albums
+Content-Type: application/json
+
+{
+  "title": "Future Album",
+  "year": 2099,
+  "price": 10,
+  "artistId": 1,
+  "genreId": 1
+}
+
+### Додати альбом, некоректна ціна
+POST {{MusicApi_HostAddress}}/api/albums
+Content-Type: application/json
+
+{
+  "title": "Free Album",
+  "year": 2020,
+  "price": 0,
+  "artistId": 1,
+  "genreId": 1
+}
+
+### Додати альбом, виконавця не існує
+POST {{MusicApi_HostAddress}}/api/albums
+Content-Type: application/json
+
+{
+  "title": "Ghost",
+  "year": 2020,
+  "price": 10,
+  "artistId": 99,
+  "genreId": 1
+}
+
+### Додати альбом, дублікат назви у виконавця
+POST {{MusicApi_HostAddress}}/api/albums
+Content-Type: application/json
+
+{
+  "title": "discovery",
+  "year": 2001,
+  "price": 15,
+  "artistId": 2,
+  "genreId": 3
+}
+
+### Видалити альбом
+DELETE {{MusicApi_HostAddress}}/api/albums/5
+
+### Видалити альбом, не знайдено
+DELETE {{MusicApi_HostAddress}}/api/albums/999
